@@ -20,32 +20,37 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment pay(Integer reservationId, int amountSent, String mode) throws Exception {
 
         Reservation reservation = reservationRepository2.findById(reservationId).get();
-        int billAmount = reservation.getNumberOfHours() * reservation.getSpot().getPricePerHour();
 
-        if (amountSent < billAmount){
+        int billPrice = reservation.getNumberOfHours()*reservation.getSpot().getPricePerHour();
+        if(amountSent < billPrice){
             throw new Exception("Insufficient Amount");
         }
-        else {
-            if (mode.equalsIgnoreCase("cash") || mode.equalsIgnoreCase("card") || mode.equalsIgnoreCase("upi")){
+        else{
+
+            if(mode.equalsIgnoreCase("cash") || mode.equalsIgnoreCase("card") || mode.equalsIgnoreCase("upi")){
                 Payment payment = new Payment();
-                if (mode.equalsIgnoreCase("cash")){
+                if(mode.equalsIgnoreCase("cash")){
                     payment.setPaymentMode(PaymentMode.CASH);
                 } else if (mode.equalsIgnoreCase("card")) {
                     payment.setPaymentMode(PaymentMode.CARD);
-                }else {
-                    payment.setPaymentMode(PaymentMode.UPI);
                 }
+                else payment.setPaymentMode(PaymentMode.UPI);
+
                 payment.setPaymentCompleted(true);
                 payment.setReservation(reservation);
 
-                //bidirectional
+                //Bidirectional
                 reservation.setPayment(payment);
+
                 reservationRepository2.save(reservation);
+
                 return payment;
             }
-            else {
+
+            else{
                 throw new Exception("Payment mode not detected");
             }
         }
+
     }
 }

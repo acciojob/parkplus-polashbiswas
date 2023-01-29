@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "parkingLot")
 public class ParkingLot {
 
     @Id
@@ -14,17 +13,17 @@ public class ParkingLot {
 
     private String name;
 
-    private String Address;
+    private String address;
 
     @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
     private List<Spot> spotList = new ArrayList<>();
 
-    public ParkingLot(String name, String address) {
-        this.name = name;
-        Address = address;
+    public ParkingLot() {
     }
 
-    public ParkingLot() {
+    public ParkingLot(String name, String address) {
+        this.name = name;
+        this.address = address;
     }
 
     public int getId() {
@@ -44,11 +43,11 @@ public class ParkingLot {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public List<Spot> getSpotList() {
@@ -58,4 +57,5 @@ public class ParkingLot {
     public void setSpotList(List<Spot> spotList) {
         this.spotList = spotList;
     }
+
 }

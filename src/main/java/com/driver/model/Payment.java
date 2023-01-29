@@ -3,7 +3,6 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payment")
 public class Payment {
 
     @Id
@@ -12,6 +11,7 @@ public class Payment {
 
     private boolean paymentCompleted;
 
+    @Enumerated(EnumType.STRING)
     private PaymentMode paymentMode;
 
     @OneToOne
@@ -57,4 +57,5 @@ public class Payment {
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
     }
+
 }

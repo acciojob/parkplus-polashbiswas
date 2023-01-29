@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
@@ -14,11 +13,13 @@ public class User {
     private int id;
 
     private String name;
+
     private String phoneNumber;
-    private String Password;
+
+    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reservation> reservationsList = new ArrayList<>();
+    private List<Reservation> reservationList = new ArrayList<>();
 
     public User() {
     }
@@ -26,7 +27,7 @@ public class User {
     public User(String name, String phoneNumber, String password) {
         this.name = name;
         this.phoneNumber = phoneNumber;
-        Password = password;
+        this.password = password;
     }
 
     public int getId() {
@@ -54,27 +55,19 @@ public class User {
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
-//    public List<Reservation> getReservationsList() {
-//        return reservationsList;
-//    }
-//
-//    public void setReservationsList(List<Reservation> reservations) {
-//        this.reservationsList = reservationsList;
-//    }
-
-
-    public List<Reservation> getReservationsList() {
-        return reservationsList;
+    public List<Reservation> getReservationList() {
+        return reservationList;
     }
 
-    public void setReservationsList(List<Reservation> reservationsList) {
-        this.reservationsList = reservationsList;
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
     }
+
 }
