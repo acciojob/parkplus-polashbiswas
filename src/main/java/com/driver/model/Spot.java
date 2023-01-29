@@ -27,11 +27,6 @@ public class Spot {
     private List<Reservation> reservationList = new ArrayList<>();
 
 
-    public Spot(SpotType spotType, int pricePerHour) {
-        this.spotType = spotType;
-        this.pricePerHour = pricePerHour;
-    }
-
     public Spot() {
     }
 

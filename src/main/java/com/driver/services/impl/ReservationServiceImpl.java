@@ -95,7 +95,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             //bidirectional
             minPriceSpot.getReservationList().add(reservation);
-            user.getReservations().add(reservation);
+            user.getReservationsList().add(reservation);
 
             userRepository3.save(user);
             spotRepository3.save(minPriceSpot);
